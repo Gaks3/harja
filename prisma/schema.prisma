@@ -2,19 +2,113 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model User {
+  id             String   @id @default(cuid())
+  firstName      String
+  lastName       String
+  bio            String?  @db.VarChar(500)
+  email          String   @unique
+  hashedPassword String
+  picture        String   @default("placeholder-user.webp")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
-    @@index([name])
+  sessions       Session[]
+  resetPasswords ResetPassword?
+  tools          Tool[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+
+  @@map("sessions")
+}
+
+model ResetPassword {
+  id      String   @id
+  userId  String   @unique
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dueDate DateTime
+
+  @@map("reset_passwords")
+}
+
+model Tool {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  token     String   @unique
+  createdAt DateTime @default(now())
+
+  soilMoistures         SoilMoisture[]
+  temperatureHumidities TemperatureHumidity[]
+  switchs               Switch[]
+  pumps                 Pump[]
+
+  @@map("tools")
+}
+
+model SoilMoisture {
+  id            Int      @id @default(autoincrement())
+  toolId        Int
+  tool          Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  moistureLevel Int      @default(0)
+  recordedAt    DateTime @default(now())
+
+  @@map("soil_moistures")
+}
+
+model TemperatureHumidity {
+  id          Int      @id @default(autoincrement())
+  toolId      Int
+  tool        Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  temperature Int      @default(0)
+  humidity    Int      @default(0)
+  recordedAt  DateTime @default(now())
+
+  @@map("temperature_humidities")
+}
+
+enum StatusSwitch {
+  on
+  off
+}
+
+model Switch {
+  id         Int      @id @default(autoincrement())
+  toolId     Int
+  tool       Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  name       String?
+  inputName  String
+  status     StatusSwitch @default(off)
+  createdAt  DateTime @default(now())
+  recordedAt DateTime @updatedAt
+
+  @@map("switchs")
+}
+
+model Pump {
+  id         Int          @id @default(autoincrement())
+  toolId     Int
+  tool       Tool         @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  status     StatusSwitch @default(off)
+  recordedAt DateTime     @default(now())
+  dateAt     DateTime     @db.Date
+  timeAt     DateTime     @db.Time() 
+
+  @@map("pumps")
 }
