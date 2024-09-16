@@ -28,10 +28,16 @@ export default function SoilMoistureCard({ value }: { value?: SoilMoisture }) {
   );
 
   const chartData = [
-    { name: "value", value: (data?.moistureLevel ?? 0) > 100 ? 100 : 0 },
+    {
+      name: "value",
+      value:
+        (data?.moistureLevel ?? 0) > 100 ? 100 : (data?.moistureLevel ?? 0),
+    },
     {
       name: "empty",
-      value: 100 - ((data?.moistureLevel ?? 0) > 100 ? 100 : 0),
+      value:
+        100 -
+        ((data?.moistureLevel ?? 0) > 100 ? 100 : (data?.moistureLevel ?? 0)),
     },
   ];
 
@@ -99,7 +105,10 @@ export default function SoilMoistureCard({ value }: { value?: SoilMoisture }) {
                           y={viewBox.cy}
                           className="text-3xl font-bold"
                         >
-                          {data?.moistureLevel ?? 0}%
+                          {(data?.moistureLevel ?? 0) > 100
+                            ? 100
+                            : (data?.moistureLevel ?? 0)}
+                          %
                         </tspan>
                         <tspan
                           x={viewBox.cx}
