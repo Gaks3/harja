@@ -37,12 +37,12 @@ export default function Hero() {
               menanam dan menghemat sumber daya dengan teknologi kami.
             </p>
             <div className="mt-7 flex items-center justify-center gap-x-6">
-              <a
-                href="#"
+              <Link
+                href="/login"
                 className="rounded-md bg-[#188753] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#145d40] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#145d40]"
               >
                 Get started
-              </a>
+              </Link>
               <a
                 href="#"
                 className="text-sm font-semibold leading-6 text-gray-900"
@@ -54,7 +54,7 @@ export default function Hero() {
         </div>
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+          className="absolute inset-x-0 bottom-10 -z-10 transform-gpu overflow-hidden blur-3xl"
         >
           <div
             style={{
