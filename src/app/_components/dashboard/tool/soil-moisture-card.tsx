@@ -28,10 +28,10 @@ export default function SoilMoistureCard({ value }: { value?: SoilMoisture }) {
   );
 
   const chartData = [
-    { name: "value", value: (data?.moistureLevel ?? 0) < 100 ? 100 : 0 },
+    { name: "value", value: (data?.moistureLevel ?? 0) > 100 ? 100 : 0 },
     {
       name: "empty",
-      value: 100 - ((data?.moistureLevel ?? 0) < 100 ? 100 : 0),
+      value: 100 - ((data?.moistureLevel ?? 0) > 100 ? 100 : 0),
     },
   ];
 

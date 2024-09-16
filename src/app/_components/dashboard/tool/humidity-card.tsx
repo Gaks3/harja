@@ -32,10 +32,10 @@ export default function HumidityCard({
   );
 
   const chartData = [
-    { name: "value", value: (data?.humidity ?? 0) < 100 ? 100 : 0 },
+    { name: "value", value: (data?.humidity ?? 0) > 100 ? 100 : 0 },
     {
       name: "empty",
-      value: 100 - ((data?.humidity ?? 0) < 100 ? 100 : 0),
+      value: 100 - ((data?.humidity ?? 0) > 100 ? 100 : 0),
     },
   ];
 
