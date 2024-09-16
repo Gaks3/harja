@@ -32,8 +32,11 @@ export default function HumidityCard({
   );
 
   const chartData = [
-    { name: "value", value: data?.humidity ?? 0 },
-    { name: "empty", value: 100 - (data?.humidity ?? 0) },
+    { name: "value", value: (data?.humidity ?? 0) < 100 ? 100 : 0 },
+    {
+      name: "empty",
+      value: 100 - ((data?.humidity ?? 0) < 100 ? 100 : 0),
+    },
   ];
 
   const chartConfig = {
@@ -54,7 +57,7 @@ export default function HumidityCard({
   return (
     <Card className="mx-auto w-full max-w-sm md:col-span-2 lg:col-span-1">
       <CardHeader className="items-center p-4 pb-2">
-        <CardTitle className="text-xl">Humidity</CardTitle>
+        <CardTitle className="text-xl">Kelembapan Ruangan</CardTitle>
         <CardDescription>
           {formatDistance(data?.recordedAt ?? new Date(), new Date(), {
             addSuffix: true,

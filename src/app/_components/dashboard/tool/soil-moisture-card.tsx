@@ -28,8 +28,11 @@ export default function SoilMoistureCard({ value }: { value?: SoilMoisture }) {
   );
 
   const chartData = [
-    { name: "value", value: data?.moistureLevel ?? 0 },
-    { name: "empty", value: 100 - (data?.moistureLevel ?? 0) },
+    { name: "value", value: (data?.moistureLevel ?? 0) < 100 ? 100 : 0 },
+    {
+      name: "empty",
+      value: 100 - ((data?.moistureLevel ?? 0) < 100 ? 100 : 0),
+    },
   ];
 
   const chartConfig = {
@@ -50,7 +53,7 @@ export default function SoilMoistureCard({ value }: { value?: SoilMoisture }) {
   return (
     <Card className="mx-auto w-full max-w-sm">
       <CardHeader className="items-center p-4 pb-2">
-        <CardTitle className="text-xl">Soil Moisture</CardTitle>
+        <CardTitle className="text-xl">Kelembapan Tanah</CardTitle>
         <CardDescription>
           {formatDistance(data?.recordedAt ?? new Date(), new Date(), {
             addSuffix: true,

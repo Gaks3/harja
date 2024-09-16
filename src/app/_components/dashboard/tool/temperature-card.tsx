@@ -46,7 +46,7 @@ export default function TemperatureCard({
   return (
     <Card className="mx-auto w-full max-w-sm">
       <CardHeader className="items-center p-4 pb-2">
-        <CardTitle className="text-xl">Temperature</CardTitle>
+        <CardTitle className="text-xl">Suhu Ruangan</CardTitle>
         <CardDescription>
           {formatDistance(data?.recordedAt ?? new Date(), new Date(), {
             addSuffix: true,
