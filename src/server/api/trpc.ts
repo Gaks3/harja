@@ -6,11 +6,12 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import { initTRPC } from "@trpc/server";
+import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "@/server/db";
+import { validateRequest } from "../auth";
 
 /**
  * 1. CONTEXT
@@ -104,3 +105,60 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  * are logged in.
  */
 export const publicProcedure = t.procedure.use(timingMiddleware);
+
+const enforceUserIsAuthenticated = t.middleware(async (opts) => {
+  try {
+    const result = await validateRequest();
+
+    if (!result?.session || !result.user)
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to perform this action",
+      });
+
+    return await opts.next({
+      ctx: {
+        ...opts.ctx,
+        user: result.user,
+        session: result.session,
+      },
+    });
+  } catch (error) {
+    if (error instanceof TRPCError) throw error;
+
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Failed to verify session token",
+    });
+  }
+});
+
+export const protectedProcedure = t.procedure.use(enforceUserIsAuthenticated);
+
+const enforceUserIsAdmin = t.middleware(async (opts) => {
+  try {
+    const result = await validateRequest();
+
+    if (!result.session || !result.user?.isAdmin)
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to perform this action",
+      });
+
+    return await opts.next({
+      ctx: {
+        ...opts.ctx,
+        user: result.user,
+      },
+    });
+  } catch (error) {
+    if (error instanceof TRPCError) throw error;
+
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "Failed to verify session token",
+    });
+  }
+});
+
+export const adminProcedure = t.procedure.use(enforceUserIsAdmin);
