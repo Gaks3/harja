@@ -11,6 +11,11 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    MQTT_TOPIC_TEMPLATE: z.string(),
+    PORT: z.string(),
+    BACKEND_URL: z.string().url(),
+    RESEND_API_KEY: z.string(),
+    RECAPTCHA_SECRET_KEY: z.string(),
   },
 
   /**
@@ -19,7 +24,12 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_BASE_URL: z.string(),
+    NEXT_PUBLIC_MQTT_URL: z.string().url(),
+    NEXT_PUBLIC_MQTT_PORT: z.string(),
+    NEXT_PUBLIC_MQTT_USERNAME: z.string(),
+    NEXT_PUBLIC_MQTT_PASSWORD: z.string(),
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: z.string(),
   },
 
   /**
@@ -29,7 +39,17 @@ export const env = createEnv({
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+    PORT: process.env.PORT,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+    NEXT_PUBLIC_MQTT_URL: process.env.NEXT_PUBLIC_MQTT_URL,
+    NEXT_PUBLIC_MQTT_PORT: process.env.NEXT_PUBLIC_MQTT_PORT,
+    NEXT_PUBLIC_MQTT_USERNAME: process.env.NEXT_PUBLIC_MQTT_USERNAME,
+    NEXT_PUBLIC_MQTT_PASSWORD: process.env.NEXT_PUBLIC_MQTT_PASSWORD,
+    MQTT_TOPIC_TEMPLATE: process.env.MQTT_TOPIC_TEMPLATE,
+    BACKEND_URL: process.env.BACKEND_URL,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY,
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
