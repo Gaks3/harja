@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import { AlignJustifyIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import Link from "next/link";
+import type { User } from "lucia";
 
-export default function Navbar() {
+export default function Navbar({ user }: { user?: User | null }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -72,14 +73,16 @@ export default function Navbar() {
             Contact
           </Link>
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link
-            href="/login"
-            className="rounded-md bg-[#188753] px-[18px] py-[7px] text-sm font-semibold leading-6 text-white hover:bg-[#145d40]"
-          >
-            Log in
-          </Link>
-        </div>
+        {user && (
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <Link
+              href="/login"
+              className="rounded-md bg-[#188753] px-[18px] py-[7px] text-sm font-semibold leading-6 text-white hover:bg-[#145d40]"
+            >
+              Log in
+            </Link>
+          </div>
+        )}
         <Sheet>
           <div className="flex lg:hidden">
             <SheetTrigger
@@ -119,14 +122,16 @@ export default function Navbar() {
                     Contact
                   </Link>
                 </div>
-                <div className="flex py-6">
-                  <Link
-                    href="/login"
-                    className="-mx-3 flex w-full items-center rounded-lg bg-primary p-5 px-3 py-2.5 text-base font-semibold leading-7 text-primary-foreground transition-colors duration-300 hover:bg-primary/90"
-                  >
-                    Log in
-                  </Link>
-                </div>
+                {user && (
+                  <div className="flex py-6">
+                    <Link
+                      href="/login"
+                      className="-mx-3 flex w-full items-center rounded-lg bg-primary p-5 px-3 py-2.5 text-base font-semibold leading-7 text-primary-foreground transition-colors duration-300 hover:bg-primary/90"
+                    >
+                      Log in
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </SheetContent>

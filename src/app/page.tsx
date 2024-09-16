@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Hero from "./_components/home/hero";
 import Navbar from "./_components/home/navbar";
+import { validateRequest } from "@/server/auth";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -9,9 +10,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
+  const validate = await validateRequest();
+
   return (
     <>
-      <Navbar />
+      <Navbar user={validate.user} />
       <Hero />
     </>
   );
