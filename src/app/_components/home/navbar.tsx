@@ -73,7 +73,7 @@ export default function Navbar({ user }: { user?: User | null }) {
             Contact
           </Link>
         </div>
-        {user && (
+        {!user && (
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <Link
               href="/login"
@@ -122,7 +122,7 @@ export default function Navbar({ user }: { user?: User | null }) {
                     Contact
                   </Link>
                 </div>
-                {user && (
+                {!user && (
                   <div className="flex py-6">
                     <Link
                       href="/login"
