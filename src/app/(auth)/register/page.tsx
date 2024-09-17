@@ -20,7 +20,7 @@ export default function RegisterPage() {
           className="max-w-[200px] dark:brightness-[0.2] dark:grayscale"
         />
       </div>
-      <div className="flex h-full items-center justify-center overflow-x-auto py-12">
+      <div className="flex h-full items-center justify-center overflow-x-auto px-5 py-12 md:px-3 lg:px-0">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Register</h1>
