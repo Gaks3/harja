@@ -71,11 +71,6 @@ async function createDevice(toolId: number) {
       inputName: "lamp3",
       name: "Lamp 3",
     },
-    {
-      toolId,
-      inputName: "lamp4",
-      name: "Lamp 4",
-    },
   ];
 
   await db.switch.createMany({
