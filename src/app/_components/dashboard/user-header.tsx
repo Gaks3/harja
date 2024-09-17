@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,8 +14,17 @@ import { TRPCClientError } from "@trpc/client";
 import { toast } from "@/hooks/use-toast";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { env } from "@/env";
+import { cn } from "@/lib/utils";
 
-export default function UserHeader({ user }: { user: User }) {
+export default function UserHeader({
+  user,
+  className,
+  size = "sm",
+}: {
+  user: User;
+  className?: string;
+  size?: "sm" | "lg";
+}) {
   const router = useRouter();
 
   const query = api.auth.signOut.useQuery(void 0, {
@@ -40,29 +47,21 @@ export default function UserHeader({ user }: { user: User }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
-          className="ml-auto overflow-hidden rounded-full"
+        <Avatar
+          className={cn(
+            "ml-auto cursor-pointer border",
+            className,
+            size == "lg" ? "size-24" : "size-10",
+          )}
         >
-          <Avatar>
-            <AvatarImage src={`${env.NEXT_PUBLIC_BASE_URL}/${user.picture}`} />
-            <AvatarFallback className="uppercase">
-              {user.firstName.at(0)}
-              {user.lastName.at(0)}
-            </AvatarFallback>
-          </Avatar>
-
-          <Image
-            src="/logo-green.png"
-            width={36}
-            height={36}
-            alt="Avatar"
-            className="overflow-hidden rounded-full"
-          />
-        </Button>
+          <AvatarImage src={`${env.NEXT_PUBLIC_BASE_URL}/${user.picture}`} />
+          <AvatarFallback className="uppercase">
+            {user.firstName.at(0)}
+            {user.lastName.at(0)}
+          </AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align={size == "lg" ? "center" : "end"}>
         <DropdownMenuLabel>
           Hello {user.firstName} {user.lastName}👋
         </DropdownMenuLabel>
