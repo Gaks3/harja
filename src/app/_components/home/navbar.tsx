@@ -7,6 +7,7 @@ import { AlignJustifyIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import Link from "next/link";
 import type { User } from "lucia";
+import UserHeader from "../dashboard/user-header";
 
 export default function Navbar({ user }: { user?: User | null }) {
   const [scrolled, setScrolled] = useState(false);
@@ -60,12 +61,14 @@ export default function Navbar({ user }: { user?: User | null }) {
           >
             About
           </Link>
-          <Link
-            href="/dashboard"
-            className="text-sm font-semibold leading-6 text-black hover:underline"
-          >
-            Dashboard
-          </Link>
+          {user && (
+            <Link
+              href="/dashboard"
+              className="text-sm font-semibold leading-6 text-black hover:underline"
+            >
+              Dashboard
+            </Link>
+          )}
           <Link
             href="#contact"
             className="text-sm font-semibold leading-6 text-black hover:underline"
@@ -73,18 +76,20 @@ export default function Navbar({ user }: { user?: User | null }) {
             Contact
           </Link>
         </div>
-        {!user && (
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          {!user ? (
             <Link
               href="/login"
               className="rounded-md bg-[#188753] px-[18px] py-[7px] text-sm font-semibold leading-6 text-white hover:bg-[#145d40]"
             >
               Log in
             </Link>
-          </div>
-        )}
+          ) : (
+            <UserHeader user={user} />
+          )}
+        </div>
         <Sheet>
-          <div className="flex lg:hidden">
+          <div className="flex gap-3 lg:hidden">
             <SheetTrigger
               type="button"
               className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -97,6 +102,14 @@ export default function Navbar({ user }: { user?: User | null }) {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
+                  {user && (
+                    <div className="flex w-full flex-col items-center justify-center gap-y-2 lg:hidden">
+                      <UserHeader user={user} className="ml-0" size="lg" />
+                      <span className="text-lg font-semibold">
+                        {user.firstName}
+                      </span>
+                    </div>
+                  )}
                   <Link
                     href="/"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
@@ -109,12 +122,14 @@ export default function Navbar({ user }: { user?: User | null }) {
                   >
                     About
                   </Link>
-                  <Link
-                    href="/dashboard"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Dashboard
-                  </Link>
+                  {user && (
+                    <Link
+                      href="/dashboard"
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Dashboard
+                    </Link>
+                  )}
                   <Link
                     href="#contact"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
