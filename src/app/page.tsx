@@ -4,6 +4,8 @@ import Navbar from "./_components/home/navbar";
 import { validateRequest } from "@/server/auth";
 import VisiMisi from "./_components/home/visi-misi";
 import Footer from "./_components/home/footer";
+import Benefits from "./_components/home/benefits";
+import Workflow from "./_components/home/workflow";
 
 export const metadata: Metadata = {
   title: "Harja Smart Greenhouse",
@@ -19,6 +21,8 @@ export default async function Home() {
       <Navbar user={validate.user} />
       <Hero />
       <VisiMisi />
+      <Benefits />
+      <Workflow />
       <Footer />
     </>
   );
