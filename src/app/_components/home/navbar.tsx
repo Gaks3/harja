@@ -8,6 +8,7 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import Link from "next/link";
 import type { User } from "lucia";
 import UserHeader from "../dashboard/user-header";
+import { Button } from "../ui/button";
 
 export default function Navbar({ user }: { user?: User | null }) {
   const [scrolled, setScrolled] = useState(false);
@@ -38,11 +39,11 @@ export default function Navbar({ user }: { user?: User | null }) {
       <nav className="absolute inset-4 z-40 mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Harja</span>
+            <span className="sr-only">Harja Smart Greenhouse</span>
             <Image
               width={32}
               height={32}
-              alt={"/logo-green.png"}
+              alt={"Logo Harja Smart Greenhouse"}
               src={"/logo-green.png"}
               className="h-8 w-auto"
             />
@@ -53,13 +54,13 @@ export default function Navbar({ user }: { user?: User | null }) {
             href="/"
             className="text-sm font-semibold leading-6 text-black hover:underline"
           >
-            Home
+            Beranda
           </Link>
           <Link
-            href="#about"
+            href="#visi-misi"
             className="text-sm font-semibold leading-6 text-black hover:underline"
           >
-            About
+            Visi Misi
           </Link>
           {user && (
             <Link
@@ -73,17 +74,23 @@ export default function Navbar({ user }: { user?: User | null }) {
             href="#contact"
             className="text-sm font-semibold leading-6 text-black hover:underline"
           >
-            Contact
+            Kontak
           </Link>
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden gap-x-3 lg:flex lg:flex-1 lg:justify-end">
           {!user ? (
-            <Link
-              href="/login"
-              className="rounded-md bg-[#188753] px-[18px] py-[7px] text-sm font-semibold leading-6 text-white hover:bg-[#145d40]"
-            >
-              Log in
-            </Link>
+            <>
+              <Button asChild variant={"outline"}>
+                <Link href="/login" className="">
+                  Masuk
+                </Link>
+              </Button>
+              <Button asChild>
+                <Link href="/register" className="">
+                  Daftar
+                </Link>
+              </Button>
+            </>
           ) : (
             <UserHeader user={user} />
           )}
@@ -99,8 +106,8 @@ export default function Navbar({ user }: { user?: User | null }) {
             </SheetTrigger>
           </div>
           <SheetContent>
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
+            <div className="mt-6 flow-root h-full">
+              <div className="-my-6 flex h-full flex-col justify-between divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
                   {user && (
                     <div className="flex w-full flex-col items-center justify-center gap-y-2 lg:hidden">
@@ -114,13 +121,13 @@ export default function Navbar({ user }: { user?: User | null }) {
                     href="/"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Home
+                    Beranda
                   </Link>
                   <Link
                     href="#about"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    About
+                    Visi Misi
                   </Link>
                   {user && (
                     <Link
@@ -138,13 +145,13 @@ export default function Navbar({ user }: { user?: User | null }) {
                   </Link>
                 </div>
                 {!user && (
-                  <div className="flex py-6">
-                    <Link
-                      href="/login"
-                      className="-mx-3 flex w-full items-center rounded-lg bg-primary p-5 px-3 py-2.5 text-base font-semibold leading-7 text-primary-foreground transition-colors duration-300 hover:bg-primary/90"
-                    >
-                      Log in
-                    </Link>
+                  <div className="flex flex-col gap-y-3 py-6">
+                    <Button variant={"outline"} asChild>
+                      <Link href={"/login"}>Masuk</Link>
+                    </Button>
+                    <Button asChild>
+                      <Link href={"/register"}>Register</Link>
+                    </Button>
                   </div>
                 )}
               </div>
