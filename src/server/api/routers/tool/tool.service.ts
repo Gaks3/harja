@@ -189,7 +189,7 @@ export async function getToolHistory(id: number, userId: string) {
             moistureLevel: true,
           },
           orderBy: {
-            recordedAt: "asc",
+            recordedAt: "desc",
           },
           take: 50,
         },
@@ -200,7 +200,7 @@ export async function getToolHistory(id: number, userId: string) {
             humidity: true,
           },
           orderBy: {
-            recordedAt: "asc",
+            recordedAt: "desc",
           },
           take: 50,
         },
@@ -226,6 +226,7 @@ export async function getToolHistory(id: number, userId: string) {
       ...value,
       recordedAt: value.recordedAt.toISOString(),
     }));
+    console.log(soilMoistures[soilMoistures.length - 1]);
 
     const temperatureHumidities = data.temperatureHumidities.map((value) => ({
       ...value,
