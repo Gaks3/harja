@@ -43,11 +43,7 @@ export default function Footer() {
               href={"https://wa.me/qr/X6C7LXFX2N4TN1"}
               className="group transition-colors duration-200"
             >
-              <Whatsapp
-                src={"/whatsapp-icon.svg"}
-                alt="Whatsapp Icon"
-                className="size-6 fill-slate-500 stroke-2 group-hover:fill-slate-700"
-              />
+              <Whatsapp className="size-6 fill-slate-500 stroke-2 group-hover:fill-slate-700" />
             </Link>
           </div>
           <p className="mt-6 text-sm text-slate-500 sm:mt-0">
