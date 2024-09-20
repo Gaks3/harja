@@ -226,6 +226,7 @@ export async function getToolHistory(id: number, userId: string) {
       ...value,
       recordedAt: value.recordedAt.toISOString(),
     }));
+    console.log(soilMoistures[soilMoistures.length - 1]);
 
     const temperatureHumidities = data.temperatureHumidities.map((value) => ({
       ...value,
