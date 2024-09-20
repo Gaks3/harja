@@ -57,10 +57,28 @@ export default function Navbar({ user }: { user?: User | null }) {
             Beranda
           </Link>
           <Link
-            href="#visi-misi"
+            href="/#visi-misi"
             className="text-sm font-semibold leading-6 text-black hover:underline"
           >
             Visi Misi
+          </Link>
+          <Link
+            href="/#benefits"
+            className="text-sm font-semibold leading-6 text-black hover:underline"
+          >
+            Keunggulan
+          </Link>
+          <Link
+            href="/#workflow"
+            className="text-sm font-semibold leading-6 text-black hover:underline"
+          >
+            Cara Kerja
+          </Link>
+          <Link
+            href="/panduan"
+            className="text-sm font-semibold leading-6 text-black hover:underline"
+          >
+            Panduan
           </Link>
           {user && (
             <Link
@@ -71,7 +89,7 @@ export default function Navbar({ user }: { user?: User | null }) {
             </Link>
           )}
           <Link
-            href="#contact"
+            href="/#contact"
             className="text-sm font-semibold leading-6 text-black hover:underline"
           >
             Kontak
@@ -124,10 +142,28 @@ export default function Navbar({ user }: { user?: User | null }) {
                     Beranda
                   </Link>
                   <Link
-                    href="#about"
+                    href="/#visi-misi"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     Visi Misi
+                  </Link>
+                  <Link
+                    href="/#benefits"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Keunggulan
+                  </Link>
+                  <Link
+                    href="/#workflow"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Cara Kerja
+                  </Link>
+                  <Link
+                    href="/panduan"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Panduan
                   </Link>
                   {user && (
                     <Link
@@ -138,10 +174,10 @@ export default function Navbar({ user }: { user?: User | null }) {
                     </Link>
                   )}
                   <Link
-                    href="#contact"
+                    href="/#contact"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Contact
+                    Kontak
                   </Link>
                 </div>
                 {!user && (
