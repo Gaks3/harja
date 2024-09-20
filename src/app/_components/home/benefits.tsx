@@ -57,7 +57,10 @@ const listBenefit: Props[] = [
 
 export default function Benefits() {
   return (
-    <section className="mt-20 space-y-10 bg-primary bg-gradient-to-r from-[#17884f] via-[#188653] to-[#25c481] py-32 text-primary-foreground">
+    <section
+      id="benefits"
+      className="mt-20 space-y-10 bg-primary bg-gradient-to-r from-[#17884f] via-[#188653] to-[#25c481] py-32 text-primary-foreground"
+    >
       <div className="mx-10 max-w-4xl space-y-2 lg:mx-auto">
         <h2 className="text-center text-4xl font-semibold">
           Mengapa Memilih Kami?
