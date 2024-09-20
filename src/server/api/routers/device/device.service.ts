@@ -78,7 +78,7 @@ export async function getSoilMoistureHistory(toolId: number) {
         moistureLevel: true,
       },
       orderBy: {
-        recordedAt: "asc",
+        recordedAt: "desc",
       },
       take: 50,
     });
@@ -109,7 +109,7 @@ export async function getTemperatureHumidityHistory(toolId: number) {
         humidity: true,
       },
       orderBy: {
-        recordedAt: "asc",
+        recordedAt: "desc",
       },
       take: 50,
     });

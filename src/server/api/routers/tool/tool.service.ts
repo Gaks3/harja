@@ -189,7 +189,7 @@ export async function getToolHistory(id: number, userId: string) {
             moistureLevel: true,
           },
           orderBy: {
-            recordedAt: "asc",
+            recordedAt: "desc",
           },
           take: 50,
         },
@@ -200,7 +200,7 @@ export async function getToolHistory(id: number, userId: string) {
             humidity: true,
           },
           orderBy: {
-            recordedAt: "asc",
+            recordedAt: "desc",
           },
           take: 50,
         },
@@ -245,7 +245,6 @@ export async function getToolHistory(id: number, userId: string) {
       pumps,
     };
   } catch (error) {
-    console.log(error);
     if (error instanceof TRPCError) throw error;
 
     throw new TRPCError({
