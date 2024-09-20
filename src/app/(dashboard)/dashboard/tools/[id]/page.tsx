@@ -42,7 +42,7 @@ export default async function ToolPage({
             <MoreToolButton tool={tool} />
           </div>
         </div>
-        <p>Token : {tool.token}</p>
+        <p>Token : {tool.token.split("/")[1]}</p>
       </div>
       <div className="space-y-3">
         <div>

@@ -42,7 +42,7 @@ export default async function ToolHistoryPage({
             <MoreToolButton tool={tool} />
           </div>
         </div>
-        <p>Token : {tool.token}</p>
+        <p>Token : {tool.token.split("/")[1]}</p>
       </div>
       <SoilMoistureCard toolId={tool.id} value={tool.soilMoistures} />
       <TemperatureCard toolId={tool.id} value={tool.temperatureHumidities} />
