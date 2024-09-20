@@ -1,9 +1,6 @@
 export default function VisiMisi() {
   return (
-    <section className="mx-10 mt-10 space-y-10 lg:mx-auto">
-      <h2 className="mx-5 mb-64 text-center text-4xl font-bold md:text-5xl">
-        &quot;Bersama Kami Bangkitkan Pertanian Modern&quot;
-      </h2>
+    <section id="visi-misi" className="mx-10 mt-10 space-y-10 lg:mx-auto">
       <h2 className="text-center text-4xl font-bold">Visi dan Misi Kami</h2>
       <p className="!mt-2 text-center">
         Menjadikan Visi Kami Kenyataan dengan Misi yang Jelas
